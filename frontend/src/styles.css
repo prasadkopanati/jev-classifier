@@ -87,6 +87,99 @@ button:disabled {
   color: var(--danger);
 }
 
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.card {
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.type-tag {
+  margin-left: 4px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.value {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.value-note {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.meta {
+  margin: 2px 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.bars {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.bars li {
+  display: grid;
+  grid-template-columns: minmax(70px, 40%) 1fr 40px;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.bar-label {
+  overflow-wrap: anywhere;
+}
+
+.bar-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--muted);
+}
+
+.highlight .bar-fill {
+  background: var(--accent);
+}
+
+.highlight .bar-label,
+.highlight .bar-value {
+  font-weight: 600;
+}
+
+.bar-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 pre {
   overflow: auto;
   padding: 12px;

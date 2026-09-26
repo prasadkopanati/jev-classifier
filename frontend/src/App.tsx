@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { ApiError, classify } from "./api";
+import ResultCards from "./components/ResultCards";
 import type { ClassifyResult } from "./types";
 
 const SAMPLE_TEXT =
@@ -63,7 +64,7 @@ export default function App() {
       </form>
 
       {error && <p role="alert">{error}</p>}
-      {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
+      {result && <ResultCards answers={result.answers} />}
     </main>
   );
 }
