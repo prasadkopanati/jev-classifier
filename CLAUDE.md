@@ -25,7 +25,7 @@ Read `PRD.md` first. It defines what to build and what is out of scope.
 
 ## Dependencies (supply chain rules)
 - Only add packages through `uv add` (backend) and `npm install --save-exact` (frontend). Never edit lockfiles by hand.
-- Age rule: never install a version published less than 7 days ago. Python is enforced by `exclude-newer` in `backend/pyproject.toml`. For npm, check publish dates with `npm view <pkg> time` before installing, unless a native minimum-release-age setting is confirmed and configured.
+- Age rule: never install a version published less than 7 days ago. Python is enforced by `exclude-newer = "7 days"` in `backend/pyproject.toml`. npm is enforced by the fixed `before=` date in `frontend/.npmrc` (npm 11.8.0 ignores `min-release-age`, so do not rely on it). When upgrading, move `before` to today minus 7 days, and verify publish dates with `npm view <pkg> time`.
 - Python: `no-build = true` (wheels only, no source builds). Keep `uv.lock` committed.
 - npm: `.npmrc` has `save-exact=true` and `ignore-scripts=true`. Keep `package-lock.json` committed. No `^` or `~` ranges in `package.json`.
 - Install from the lockfiles: `uv sync --locked` and `npm ci`. If a lockfile is out of date, stop and ask.
@@ -34,8 +34,16 @@ Read `PRD.md` first. It defines what to build and what is out of scope.
 - Keep the dependency list minimal. Ask before adding any package not named in `PLAN.md`.
 - Exception for an urgent security patch: only with the user's explicit approval, per package (`exclude-newer-package` for Python), with the reason noted in the README.
 
-## Commands (fill in as the project is built)
+## Commands
 - Backend: `cd backend && uv run --locked uvicorn app.main:app --reload --port 8000`
-- Frontend: `cd frontend && npm run dev`
-- Tests: `cd backend && uv run pytest`
-- Smoke check: `cd backend && uv run python scripts/smoke.py`
+- Frontend: `cd frontend && npm run dev` (http://localhost:5173, proxies `/api` to port 8000)
+- Backend tests: `cd backend && uv run --locked pytest`
+- Frontend typecheck and build: `cd frontend && npm run build`
+- Install from lockfiles: `cd backend && uv sync --locked` and `cd frontend && npm ci`
+- Smoke check (real call): `cd backend && uv run python scripts/smoke.py`
+- Latency probe (10 real calls): `cd backend && uv run python scripts/latency_probe.py`
+
+## Running servers safely
+- Any server that reaches the real Jev API spends the user's credit. Only start one when the task needs it, and use no real requests other than the ones the task calls for. The user runs the smoke and latency scripts.
+- Stop servers by port, not by wrapper PID: `lsof -ti tcp:8000 -sTCP:LISTEN | xargs kill` (same for 5173). Check with `lsof -nP -iTCP:8000 -iTCP:5173 -sTCP:LISTEN` that the ports are free before starting a server, and again after a test. A stale server on the port silently answers instead of the new one.
+- To test error paths without spending credit, use a fake key in the environment (`ZEN_API_KEY=fake ...`) only after confirming the port was free.
