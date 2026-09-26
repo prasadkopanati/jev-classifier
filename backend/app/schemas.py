@@ -1,6 +1,8 @@
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+from app.config import MAX_TEXT_CHARS
 
 
 class Usage(BaseModel):
@@ -42,7 +44,14 @@ class JevResponse(BaseModel):
 
 
 class ClassifyRequest(BaseModel):
-    text: str
+    text: str = Field(max_length=MAX_TEXT_CHARS)
+
+    @field_validator("text")
+    @classmethod
+    def not_blank(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("text must not be empty")
+        return value
 
 
 class ClassifyResult(BaseModel):

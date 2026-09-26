@@ -108,7 +108,7 @@ Nothing else is built on assumptions until this passes.
 - Flow: build body, time the call, compute cost, log, return `{answers, cost_usd, cost_estimated, latency_ms, raw_response, model}`.
 - On any Jev error: log the failed attempt with its latency, return the error contract with a suitable status.
 - Tests with `TestClient` and a mocked Jev: happy path, each error path, and that a log line is written in every case.
-- Done when: tests pass and `uv run fastapi dev` serves it.
+- Done when: tests pass and `uv run uvicorn app.main:app` serves it.
 
 **Task 2.2: Live check**
 - With the real key, run the server and POST the PRD example with curl.

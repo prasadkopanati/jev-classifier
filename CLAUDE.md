@@ -35,7 +35,7 @@ Read `PRD.md` first. It defines what to build and what is out of scope.
 - Exception for an urgent security patch: only with the user's explicit approval, per package (`exclude-newer-package` for Python), with the reason noted in the README.
 
 ## Commands (fill in as the project is built)
-- Backend: `cd backend && uv run fastapi dev`
+- Backend: `cd backend && uv run --locked uvicorn app.main:app --reload --port 8000`
 - Frontend: `cd frontend && npm run dev`
 - Tests: `cd backend && uv run pytest`
 - Smoke check: `cd backend && uv run python scripts/smoke.py`
