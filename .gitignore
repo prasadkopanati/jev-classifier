@@ -1,3 +1,36 @@
-log.jsonl
+# Secrets (only .env.example is tracked)
 .env
 *.env
+.env.*
+!.env.example
+
+# Runtime request log (contains user input text)
+log.jsonl
+*.log
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+.vite/
+npm-debug.log*
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+# Lockfiles are intentionally NOT ignored: uv.lock and package-lock.json must be committed

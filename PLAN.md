@@ -179,7 +179,7 @@ Nothing else is built on assumptions until this passes.
 | The index gives no upload time, so the age rule silently does nothing | Task 0.2 spot-checks dates in the lockfile |
 | `exclude-newer` blocks an urgent patch | Per-package exception with your approval and a README note |
 
-## Open questions for you
-1. Is `httpx` plus `respx` fine for HTTP and mocking?
-2. Is TypeScript OK for the frontend, or do you prefer plain JavaScript?
-3. Should I create the `.gitignore` even though the folder isn't a git repository yet? I'd also run `git init` if you want commits per task.
+## Answered questions
+1. `httpx` plus `respx` for HTTP and mocking: approved.
+2. Frontend language: TypeScript.
+3. Git: the repo is initialised (`main`) and `.gitignore` exists. Commit after each task.
