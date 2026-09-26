@@ -183,3 +183,16 @@ Nothing else is built on assumptions until this passes.
 1. `httpx` plus `respx` for HTTP and mocking: approved.
 2. Frontend language: TypeScript.
 3. Git: the repo is initialised (`main`) and `.gitignore` exists. Commit after each task.
+
+## Final review against the PRD (2026-09-26)
+| Success criterion | Result | Evidence |
+|---|---|---|
+| Paste a message, get classifications in one click | Met, but not yet viewed in a real browser by me | Live API call succeeded, the cards render correctly from a real response, and the submit flow builds. You tested the page yourself. |
+| Every result shows cost and latency | Met | Summary bar shows cost to 6 decimals (with an "estimated" tag when flagged), latency and model. |
+| Every request/response appended to `log.jsonl` with cost and latency | Met | 9 entries at review time, all with `cost_usd` and `latency_ms`. |
+| Failed calls shown clearly and logged | Met | A fake key showed "Zen rejected the API key" and was logged with upstream 401, latency and no cost. A stopped backend shows "Could not reach the backend". |
+| One documented command per server | Met | README and `CLAUDE.md`. |
+| `pytest` passes against a mocked Jev API | Met | 57 passed. |
+| Dependency rules (7-day age, locked, exact, no install scripts) | Met | 68 npm packages and 92 Python file uploads checked against the cutoff. `pip-audit` and `npm audit` are clean. |
+
+Open item: `latency_ms` is 1.2 to 1.9 s, above the low hundreds of ms expected from Jev's own metrics. It measures the full round trip through Zen, not model time. See the README "Latency" section and `backend/scripts/latency_probe.py`.
