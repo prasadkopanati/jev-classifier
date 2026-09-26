@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 import { ApiError, classify } from "./api";
+import RawJson from "./components/RawJson";
 import ResultCards from "./components/ResultCards";
+import SummaryBar from "./components/SummaryBar";
 import type { ClassifyResult } from "./types";
 
 const SAMPLE_TEXT =
@@ -64,7 +66,13 @@ export default function App() {
       </form>
 
       {error && <p role="alert">{error}</p>}
-      {result && <ResultCards answers={result.answers} />}
+      {result && (
+        <>
+          <SummaryBar result={result} />
+          <ResultCards answers={result.answers} />
+          <RawJson data={result.raw_response} />
+        </>
+      )}
     </main>
   );
 }

@@ -29,6 +29,8 @@ async function toApiError(resp: Response): Promise<ApiError> {
   } catch {
     // fall through to the generic message
   }
+  // The dev proxy (or a gateway) answers with an empty 502/503/504 when the backend is down.
+  if ([502, 503, 504].includes(resp.status)) return new ApiError(UNREACHABLE);
   return new ApiError({
     code: "http_error",
     message: `The server returned an unexpected error (HTTP ${resp.status}).`,

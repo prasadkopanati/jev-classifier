@@ -87,6 +87,44 @@ button:disabled {
   color: var(--danger);
 }
 
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 20px 0 0;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+
+.summary dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.summary dd {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.estimated {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--danger);
+}
+
+.raw {
+  margin-top: 20px;
+}
+
+.raw summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
