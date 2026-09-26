@@ -31,7 +31,7 @@ Audience: the author, i.e. myself. This is a personal project that runs locally.
 - Auth: `Authorization: Bearer $ZEN_API_KEY`. The key lives in a git-ignored `.env` and is never logged or sent to the browser.
 - Model: `jev-1.13`.
 - Price: $0.042 per 1M input tokens, output free.
-- Request body (from the TypeSafe quickstart, to be verified against Zen):
+- Request body (verified against Zen on 2026-09-26 with a live call):
   ```json
   {
     "model": "jev-1.13",
@@ -41,7 +41,10 @@ Audience: the author, i.e. myself. This is a personal project that runs locally.
     }
   }
   ```
-- Response: `{"model", "answers": {"<id>": {...}}, "usage": {"input_tokens", "output_tokens"}}`.
+- Response (verified): `{"model", "answers": {"<id>": {...}}, "usage": {"input_tokens", "output_tokens"}}`.
+  - Each answer carries a `type` field. Choice: `choice`, `confidence`, `probabilities`. Score: `score`, `confidence`, `legend`, `probabilities`. Noul: `noul`.
+  - The API reports `model` as `jev-1.13`.
+  - Observed on the smoke call: 414 input tokens, 73 output tokens, about $0.0000174, 1.7 s for 3 questions.
 
 ## Metrics (fixed in code)
 The user only types the query text. The questions are hardcoded in the backend.
@@ -83,6 +86,7 @@ Example input: "I have been billed twice for the subscription and I want to revi
 - Accuracy benchmarking against labeled data.
 
 ## Risks and open items
-- **Zen body compatibility.** Assumed to match TypeSafe's raw API. Verify with one curl call before building on it.
-- **Funded account.** A Zen account with credit and an API key must exist before live testing. The user creates `.env` with `ZEN_API_KEY`.
-- **Missing `usage`.** If Zen omits it, the token estimate is used and flagged in the UI and log.
+- **Zen body compatibility.** Resolved. A live call confirmed Zen accepts TypeSafe's request body and returns the documented response, including `usage`.
+- **Funded account.** Resolved. `.env` with `ZEN_API_KEY` exists and the live call succeeded.
+- **Missing `usage`.** `usage` is present today. The token estimate remains as a fallback and is flagged in the UI and log if it is ever missing.
+- **Cost scale.** A request costs about $0.00002, so cost is shown to 6 decimals.
