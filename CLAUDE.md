@@ -31,7 +31,7 @@ Read `PRD.md` first. It defines what to build and what is out of scope.
 - Install from the lockfiles: `uv sync --locked` and `npm ci`. If a lockfile is out of date, stop and ask.
 - Upgrades are deliberate. Do not run `uv lock --upgrade` or `npm update` without asking. Show the lockfile diff and run the tests afterwards.
 - After adding an npm package, check whether it declares install scripts (`preinstall`, `install`, `postinstall`) and tell the user. An unexpected script is a red flag.
-- Keep the dependency list minimal. Ask before adding any package not named in `PLAN.md`.
+- Keep the dependency list minimal. Ask before adding any package not named in `docs/PLAN.md`.
 - Exception for an urgent security patch: only with the user's explicit approval, per package (`exclude-newer-package` for Python), with the reason noted in the README.
 
 ## Commands

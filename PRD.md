@@ -3,7 +3,7 @@
 ## Purpose
 Learn how Jev (TypeSafe's classification-only "System One" model) behaves on customer-support text: what it returns, what it costs and how fast it is.
 
-Audience: the author, i.e. myself. This is a personal project that runs locally.
+Scope: a single-user, local-only evaluation tool, not a hosted service. No accounts, no multi-user concerns, no deployment target.
 
 ## Success criteria
 - I will paste a support message into a web page and get structured classifications in one click.

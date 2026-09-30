@@ -1,8 +1,12 @@
 # Jev Classifier
 
-A small local app for evaluating Jev, TypeSafe's classification-only "System One" model, through opencode.ai Zen. Paste a customer message and Jev classifies it on seven fixed metrics. The page shows each answer with its confidence and probabilities, plus the cost and latency of the request. Every call is logged.
+A small local tool for evaluating [Jev](https://docs.typesafe.ai/introduction), TypeSafe's classification-only "System One" model, through [opencode.ai](https://opencode.ai) Zen. Paste a customer support message in and Jev classifies it on seven fixed metrics — intent, department, frustration, urgency, refund request, escalation and churn risk — each with its confidence and probability breakdown. The page also shows the cost and latency of the request, and every call, including failures, is logged to `log.jsonl`.
 
-Requirements are in [PRD.md](PRD.md). The build plan is in [PLAN.md](PLAN.md). Working rules are in [CLAUDE.md](CLAUDE.md).
+It exists to answer a practical question: how well does Jev classify real support text, and what does that cost and how fast is it? By design it's a single-user, local-only tool — no accounts, no deployment story, no result history in the UI. See [PRD.md](PRD.md) for the full scope and what's intentionally left out.
+
+> **This spends real money.** Every classification, and the smoke/latency scripts below, is a billed call against your own opencode.ai Zen account. See [Cost](#cost).
+
+Requirements are in [PRD.md](PRD.md). Working rules are in [CLAUDE.md](CLAUDE.md). `docs/` has the original brief, the build plan and the design notes this was built from — see [docs/brief.md](docs/brief.md), [docs/PLAN.md](docs/PLAN.md) and [docs/understanding.md](docs/understanding.md).
 
 ## Setup
 Prerequisites: [uv](https://docs.astral.sh/uv/), Node.js and npm, and a funded opencode.ai Zen account.
@@ -116,3 +120,6 @@ frontend/  Vite + React + TypeScript app (src/), package-lock.json
 log.jsonl  request log (created at runtime, git-ignored)
 .env       ZEN_API_KEY (git-ignored, you create it)
 ```
+
+## License
+[MIT](LICENSE)
