@@ -4,6 +4,8 @@ A small local tool for evaluating [Jev](https://docs.typesafe.ai/introduction), 
 
 It exists to answer a practical question: how well does Jev classify real support text, and what does that cost and how fast is it? By design it's a single-user, local-only tool — no accounts, no deployment story, no result history in the UI. See [PRD.md](PRD.md) for the full scope and what's intentionally left out.
 
+**Video walkthrough:** [Getting Started with Jev](https://youtu.be/VFN_kUOdfy0) (26 min, with chapters) covers what Jev and System One models are, a tour of this project, a live demo, the code path from the UI to Jev, and the cost and log code.
+
 > **This spends real money.** Every classification, and the smoke/latency scripts below, is a billed call against your own opencode.ai Zen account. See [Cost](#cost).
 
 Requirements are in [PRD.md](PRD.md). Working rules are in [CLAUDE.md](CLAUDE.md). `docs/` has the original brief, the build plan and the design notes this was built from — see [docs/brief.md](docs/brief.md), [docs/PLAN.md](docs/PLAN.md) and [docs/understanding.md](docs/understanding.md).
